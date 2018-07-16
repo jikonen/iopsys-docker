@@ -24,7 +24,8 @@ docker inspect "iopsys-build:latest" >/dev/null 2>&1 || {
 	exit 0
 }
 
-docker run --rm --user build \
+docker run --rm \
+	--user `id -u` \
 	-v $SSH_AUTH_SOCK:/ssh-agent --env SSH_AUTH_SOCK=/ssh-agent \
 	-v ~/.ccache:/home/build/.ccache \
 	-v $(pwd)/iopsys:/home/build/iopsys:delegated \

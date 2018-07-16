@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd ~
+sudo chown -Rfv build.build iopsys 
 git clone git@public.inteno.se:iopsys.git iopsys
 cd iopsys
 git checkout master
@@ -8,7 +9,7 @@ git checkout master
 ./iop setup_host
 ./iop feeds_update
 
-echo "#!/bin/bash
+sudo echo "#!/bin/bash
 cd ~
 cd iopsys
 " > /init.iopsys
