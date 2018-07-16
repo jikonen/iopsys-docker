@@ -1,4 +1,11 @@
 #!/bin/bash
+[ "" = "${SSH_AGENT_PID}" ] && {
+	echo "Starting SSH agent in daemon mode"
+       	ssh-agent -s
+} || {
+	echo "Good SSH agent running as pid ${SSH_AGENT_PID}"
+}
+
 docker inspect "iopsys-build:latest" >/dev/null 2>&1 || {
 	[ -f ./iopsys-build.tar ] && {
 		echo "Importing image from iopsys-build.tar"
@@ -17,4 +24,9 @@ docker inspect "iopsys-build:latest" >/dev/null 2>&1 || {
 	exit 0
 }
 
-docker run --rm --user build -v ~/.ccache:/home/build/.ccache -v $(pwd)/iopsys:/home/build/iopsys:delegated -it iopsys-build:latest /bin/bash 
+docker run --rm --user build \
+	-v $SSH_AUTH_SOCK:/ssh-agent --env SSH_AUTH_SOCK=/ssh-agent \
+	-v ~/.ccache:/home/build/.ccache \
+	-v $(pwd)/iopsys:/home/build/iopsys:delegated \
+	-it iopsys-build:latest \
+	/bin/bash 
