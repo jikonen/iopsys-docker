@@ -1,0 +1,2 @@
+alias iopg="iop genconfig"
+alias iopfu="iop feeds_update"
