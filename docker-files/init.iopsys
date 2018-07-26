@@ -2,14 +2,16 @@
 
 cd ~
 sudo chown -Rfv build.build iopsys 
+
+#For those with private access
 git clone git@public.inteno.se:iopsys.git iopsys
+
+#For public access 
+#git clone http://public.inteno.se/iopsys.git iopsys
+
 cd iopsys
 git checkout master
 ./iop bootstrap
 ./iop setup_host
 ./iop feeds_update
 
-sudo echo "#!/bin/bash
-cd ~
-cd iopsys
-" > /init.iopsys

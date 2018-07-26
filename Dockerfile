@@ -34,6 +34,4 @@ RUN chown -Rf build.build /home/build/
 RUN apt-get autoremove && apt-get autoclean && apt-get clean 
 USER build
 
-RUN /init.iopsys
-
 CMD ["/sbin/my_init"]
