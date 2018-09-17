@@ -49,6 +49,7 @@ docker run --name docker-iopsys \
 	--user `id -u` \
 	-v $SSH_AUTH_SOCK:/ssh-agent --env SSH_AUTH_SOCK=/ssh-agent \
 	-v ~/.ccache:/home/build/.ccache \
+	-v $(pwd)/external:/home/build/external \
 	-v $(pwd)/iopsys:/home/build/iopsys:delegated \
 	-it iopsys-build:latest \
 	/bin/bash 

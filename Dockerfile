@@ -1,5 +1,5 @@
-#FROM ubuntu:16.04
-FROM phusion/baseimage:0.10.1
+FROM ubuntu:16.04
+#FROM phusion/baseimage:0.10.1
 
 ENV HOME /home/build
 ENV USER build
@@ -25,7 +25,9 @@ COPY docker-files/localdir-to-path.sh /etc/profile.d/localdir-to-path.sh
 
 RUN locale-gen en_US.UTF-8
 
-COPY docker-files/init.iopsys /init.iopsys
+RUN mkdir -p /etc/my_init.d
+COPY docker-files/init.iopsys /home/build/01-init.iopsys
+RUN chmod +x /home/build/01-init.iopsys
 
 # Fix permissions
 RUN chown -Rf build.build /home/build/
@@ -34,4 +36,3 @@ RUN chown -Rf build.build /home/build/
 RUN apt-get autoremove && apt-get autoclean && apt-get clean 
 USER build
 
-CMD ["/sbin/my_init"]

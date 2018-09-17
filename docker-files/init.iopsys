@@ -10,8 +10,8 @@ git clone git@public.inteno.se:iopsys.git iopsys
 #git clone http://public.inteno.se/iopsys.git iopsys
 
 cd iopsys
-git checkout master
-./iop bootstrap
-./iop setup_host
-./iop feeds_update
+#git checkout master
+#./iop bootstrap
+#./iop setup_host
+#./iop feeds_update
 

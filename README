@@ -1,0 +1,3 @@
+17/10/2018	Added external folder where you can copy files you want to have in docker, it will be mounted under /home/build/external
+		Note that the folder content is ignored.
+
