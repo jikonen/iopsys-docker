@@ -1,4 +1,12 @@
 #!/bin/bash
+
+[ "${1}" = "delete" ] && {
+	docker stop docker-iopsys
+	docker rm docker-iopsys
+	rm -Rfv iopsys/
+	mkdir -p iopsys
+	exit 0
+}
 [ "" = "${SSH_AGENT_PID}" ] && {
 	echo "Starting SSH agent in daemon mode"
        	ssh-agent -s
@@ -48,7 +56,6 @@ docker ps -f name=docker-iopsys | grep -q iopsys && image_running=1
 docker run --name docker-iopsys \
 	--user `id -u` \
 	-v $SSH_AUTH_SOCK:/ssh-agent --env SSH_AUTH_SOCK=/ssh-agent \
-	-v ~/.ccache:/home/build/.ccache \
 	-v $(pwd)/external:/home/build/external \
 	-v $(pwd)/iopsys:/home/build/iopsys:delegated \
 	-it iopsys-build:latest \
