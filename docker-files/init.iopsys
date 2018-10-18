@@ -4,10 +4,10 @@ cd ~
 sudo chown -Rfv build.build iopsys 
 
 #For those with private access
-git clone git@public.inteno.se:iopsys.git iopsys
+git clone git@dev.iopsys.eu:iopsys/iopsyswrt.git iopsys
 
 #For public access 
-#git clone http://public.inteno.se/iopsys.git iopsys
+#git clone https://dev.iopsys.eu/iopsys/iopsyswrt.git iopsys
 
 cd iopsys
 #git checkout master
