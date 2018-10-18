@@ -1,4 +1,9 @@
-17/10/2018	
+18/10/2018
+You can now send a bashscript as argument into ./run.bash
+Example:
+./run.bash "cd ~/iopsys ; ./iop feeds_update && ./iop genconfig -c dg301 && make"
+
+17/9/2018	
 Added external folder where you can copy files you want to have in docker, it will be mounted under /home/build/external
 Note that the folder content is ignored.
 

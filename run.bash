@@ -40,18 +40,22 @@ image_running=0
 docker ps -a -f name=docker-iopsys | grep -q iopsys && image_exists=1
 docker ps -f name=docker-iopsys | grep -q iopsys && image_running=1
 
+[ $# -eq 0 ] && cmd="/bin/bash" || cmd="/bin/bash -c"
+
 [[ ${image_running} -eq 1 ]] && {
 	echo "Connect to image"
-	docker exec -it docker-iopsys /bin/bash
+	docker exec -it docker-iopsys ${cmd} "$@"
 	exit 0
 }
 
 [[ ${image_exists} -eq 1 ]] && {
 	echo "Start and connect to image"
 	docker start docker-iopsys
-	docker exec -it docker-iopsys /bin/bash
+	docker exec -it docker-iopsys ${cmd} "$@"
 	exit 0
 }
+
+echo "Arguments: $@"
 
 docker run --name docker-iopsys \
 	--user `id -u` \
@@ -59,4 +63,4 @@ docker run --name docker-iopsys \
 	-v $(pwd)/external:/home/build/external \
 	-v $(pwd)/iopsys:/home/build/iopsys:delegated \
 	-it iopsys-build:latest \
-	/bin/bash 
+	${cmd} "$@"
